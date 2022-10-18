@@ -15,6 +15,9 @@
 		6107806428FDC89E005B261F /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6107806328FDC89E005B261F /* DataSource.swift */; };
 		6107806628FDD13B005B261F /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6107806528FDD13B005B261F /* Graph.swift */; };
 		6107806828FDFBC5005B261F /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6107806728FDFBC5005B261F /* TableCell.swift */; };
+		618BEF7B28FEA90200C5C528 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618BEF7A28FEA90200C5C528 /* Cache.swift */; };
+		618BEF7E28FEE82300C5C528 /* Brandbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618BEF7D28FEE82300C5C528 /* Brandbook.swift */; };
+		618BEF8028FEF0A900C5C528 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618BEF7F28FEF0A900C5C528 /* PaddingLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		6107806328FDC89E005B261F /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		6107806528FDD13B005B261F /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		6107806728FDFBC5005B261F /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
+		618BEF7A28FEA90200C5C528 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		618BEF7D28FEE82300C5C528 /* Brandbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brandbook.swift; sourceTree = "<group>"; };
+		618BEF7F28FEF0A900C5C528 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,12 +71,23 @@
 				6107806528FDD13B005B261F /* Graph.swift */,
 				6107805328FDC6CF005B261F /* ViewController.swift */,
 				6107806728FDFBC5005B261F /* TableCell.swift */,
+				618BEF7F28FEF0A900C5C528 /* PaddingLabel.swift */,
+				618BEF7C28FEE81500C5C528 /* Brandbook */,
+				618BEF7A28FEA90200C5C528 /* Cache.swift */,
 				6107805528FDC6CF005B261F /* Main.storyboard */,
 				6107805828FDC6D1005B261F /* Assets.xcassets */,
 				6107805A28FDC6D1005B261F /* LaunchScreen.storyboard */,
 				6107805D28FDC6D1005B261F /* Info.plist */,
 			);
 			path = avito;
+			sourceTree = "<group>";
+		};
+		618BEF7C28FEE81500C5C528 /* Brandbook */ = {
+			isa = PBXGroup;
+			children = (
+				618BEF7D28FEE82300C5C528 /* Brandbook.swift */,
+			);
+			path = Brandbook;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,8 +163,11 @@
 			files = (
 				6107806828FDFBC5005B261F /* TableCell.swift in Sources */,
 				6107806628FDD13B005B261F /* Graph.swift in Sources */,
+				618BEF7E28FEE82300C5C528 /* Brandbook.swift in Sources */,
 				6107805428FDC6CF005B261F /* ViewController.swift in Sources */,
+				618BEF8028FEF0A900C5C528 /* PaddingLabel.swift in Sources */,
 				6107806428FDC89E005B261F /* DataSource.swift in Sources */,
+				618BEF7B28FEA90200C5C528 /* Cache.swift in Sources */,
 				6107805028FDC6CF005B261F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

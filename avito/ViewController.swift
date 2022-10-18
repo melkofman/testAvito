@@ -11,24 +11,45 @@ class ViewController: UIViewController {
     var model: DataList?
     var tableView: UITableView!
     
+    private let refreshAction: () -> Void
+    private let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
     }
     
+    init(refreshAction: @escaping () -> Void) {
+        self.refreshAction = refreshAction
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func setUp() {
-        self.view.backgroundColor = .cyan
+        self.view.backgroundColor = Brandbook.Colors.white
         tableView = UITableView(frame: .zero, style: UITableView.Style.plain)
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tableView)
-        tableView?.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true
+        tableView?.topAnchor.constraint(equalTo: self.view.topAnchor, constant: Brandbook.Padding.big).isActive = true
         tableView?.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         tableView?.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         tableView?.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         tableView?.register(TableCell.self, forCellReuseIdentifier: TableCell.reusedId)
-        tableView?.backgroundColor = .brown
+        tableView?.backgroundColor = Brandbook.Colors.white
+        
+        tableView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+    }
+    
+    @objc
+    private func refresh(_ sender: Any) {
+        refreshAction()
+        tableView.reloadData()
     }
 }
 
@@ -54,13 +75,20 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20.0
+        return Brandbook.Height.section
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Brandbook.Height.row
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableCell.reusedId, for: indexPath) as! TableCell
-        cell.label.text = model?.company.employees[indexPath.row].name
-        cell.backgroundColor = .yellow
+        cell.labelName.text = model?.company.employees[indexPath.row].name
+        cell.labelTel.text = model?.company.employees[indexPath.row].phone_number
+        if let skills = model?.company.employees[indexPath.row].skills {
+            cell.setSkillsLabels(skills: skills)
+        }
         return cell
     }
 }

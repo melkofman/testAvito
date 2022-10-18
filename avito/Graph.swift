@@ -10,8 +10,9 @@ class Graph {
     let viewController: ViewController
     private let dataSource: DataSource
     init() {
-        viewController = ViewController()
+        
         dataSource = DataSource()
+        viewController = ViewController(refreshAction: dataSource.setUpUpdate)
         dataSource.setOnUpdate { [unowned self] in
             self.viewController.model = $0
             DispatchQueue.main.async {
