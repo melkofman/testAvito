@@ -17,7 +17,7 @@ enum Brandbook {
         static let pink: UIColor = .systemPink
         static let indigo: UIColor = .systemIndigo
         static let orange: UIColor = .systemOrange
-        static let gray2: UIColor = .systemGray2
+        static let black_alpha: UIColor = .black.withAlphaComponent(0.6)
     }
     enum TextSize {
         static let small: CGFloat = 13

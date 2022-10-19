@@ -18,6 +18,7 @@
 		618BEF7B28FEA90200C5C528 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618BEF7A28FEA90200C5C528 /* Cache.swift */; };
 		618BEF7E28FEE82300C5C528 /* Brandbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618BEF7D28FEE82300C5C528 /* Brandbook.swift */; };
 		618BEF8028FEF0A900C5C528 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618BEF7F28FEF0A900C5C528 /* PaddingLabel.swift */; };
+		62CF84C6FB2B0E6A6F9D8801 /* Pods_avito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E584115F56C7B9990339096 /* Pods_avito.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,9 @@
 		618BEF7A28FEA90200C5C528 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		618BEF7D28FEE82300C5C528 /* Brandbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brandbook.swift; sourceTree = "<group>"; };
 		618BEF7F28FEF0A900C5C528 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		7AAB1F29B9B6590DAAB58FC5 /* Pods-avito.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-avito.release.xcconfig"; path = "Target Support Files/Pods-avito/Pods-avito.release.xcconfig"; sourceTree = "<group>"; };
+		7E584115F56C7B9990339096 /* Pods_avito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_avito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		819CDE00239E98CB27C62153 /* Pods-avito.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-avito.debug.xcconfig"; path = "Target Support Files/Pods-avito/Pods-avito.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,17 +45,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62CF84C6FB2B0E6A6F9D8801 /* Pods_avito.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01449A271BD80EAF84DC23CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7E584115F56C7B9990339096 /* Pods_avito.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		50077CEEDC67653C3351D0BD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				819CDE00239E98CB27C62153 /* Pods-avito.debug.xcconfig */,
+				7AAB1F29B9B6590DAAB58FC5 /* Pods-avito.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		6107804328FDC6CE005B261F = {
 			isa = PBXGroup;
 			children = (
 				6107804E28FDC6CF005B261F /* avito */,
 				6107804D28FDC6CF005B261F /* Products */,
+				50077CEEDC67653C3351D0BD /* Pods */,
+				01449A271BD80EAF84DC23CA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,9 +122,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6107806028FDC6D1005B261F /* Build configuration list for PBXNativeTarget "avito" */;
 			buildPhases = (
+				D089D4E6CE3B61968E09FFEE /* [CP] Check Pods Manifest.lock */,
 				6107804828FDC6CF005B261F /* Sources */,
 				6107804928FDC6CF005B261F /* Frameworks */,
 				6107804A28FDC6CF005B261F /* Resources */,
+				9C943D9063398789000A7B56 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -155,6 +182,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9C943D9063398789000A7B56 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-avito/Pods-avito-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-avito/Pods-avito-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-avito/Pods-avito-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D089D4E6CE3B61968E09FFEE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-avito-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6107804828FDC6CF005B261F /* Sources */ = {
@@ -312,6 +381,7 @@
 		};
 		6107806128FDC6D1005B261F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 819CDE00239E98CB27C62153 /* Pods-avito.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -342,6 +412,7 @@
 		};
 		6107806228FDC6D1005B261F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AAB1F29B9B6590DAAB58FC5 /* Pods-avito.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

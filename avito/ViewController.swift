@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Reachability
 class ViewController: UIViewController {
     var model: DataList?
     var tableView: UITableView!
@@ -14,12 +14,40 @@ class ViewController: UIViewController {
     private let refreshAction: () -> Void
     private let refreshControl = UIRefreshControl()
     
+    let reachability = try! Reachability()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+            do{
+              try reachability.startNotifier()
+            }catch{
+              print("could not start reachability notifier")
+            }
+    }
+    
+    @objc
+    func reachabilityChanged(note: Notification) {
+
+      let reachability = note.object as! Reachability
+        
+        if reachability.connection == .unavailable {
+            showMessageToas(message: "Че-то с сетью")
+        }
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        reachability.stopNotifier()
+        NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
+    }
+    
     init(refreshAction: @escaping () -> Void) {
+        print("init vc")
         self.refreshAction = refreshAction
         super.init(nibName: nil, bundle: nil)
     }
@@ -50,6 +78,11 @@ class ViewController: UIViewController {
     private func refresh(_ sender: Any) {
         refreshAction()
         tableView.reloadData()
+        self.refreshControl.endRefreshing()
+    }
+    
+    func showMessageToas(message:String) {
+        showToast(message: message, font: .systemFont(ofSize: 12.0))
     }
 }
 
@@ -88,8 +121,31 @@ extension ViewController: UITableViewDataSource {
         cell.labelTel.text = model?.company.employees[indexPath.row].phone_number
         if let skills = model?.company.employees[indexPath.row].skills {
             cell.setSkillsLabels(skills: skills)
+            print("\(model?.company.employees[indexPath.row].name) -> \(skills)")
         }
         return cell
     }
 }
 
+
+extension UIViewController {
+    
+    func showToast(message : String, font: UIFont) {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+        toastLabel.backgroundColor = Brandbook.Colors.black_alpha
+        toastLabel.textColor = Brandbook.Colors.white
+        toastLabel.font = font
+        toastLabel.textAlignment = .center;
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = Brandbook.CornerRadius.normal;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 8.0, delay: 0.2, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
+    
+}

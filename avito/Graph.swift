@@ -10,7 +10,6 @@ class Graph {
     let viewController: ViewController
     private let dataSource: DataSource
     init() {
-        
         dataSource = DataSource()
         viewController = ViewController(refreshAction: dataSource.setUpUpdate)
         dataSource.setOnUpdate { [unowned self] in
@@ -19,7 +18,13 @@ class Graph {
                 self.viewController.tableView.reloadData()
             }
         }
-        setUpUpdate()
+        dataSource.showToast{ [unowned self] in
+            let message = $0
+            DispatchQueue.main.async {
+            self.viewController.showMessageToas(message: message)
+            }
+        }
+//        setUpUpdate()
     }
     
     func setUpUpdate() {

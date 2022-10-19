@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = graph.viewController
         window?.makeKeyAndVisible()
+        graph.setUpUpdate()
         return true
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 class TableCell: UITableViewCell {
     static let reusedId = "cellId"
     var labels: [PaddingLabel] = []
+    var skills_array: [String] = []
     var colors: [UIColor] = [Brandbook.Colors.teal, Brandbook.Colors.yellow, Brandbook.Colors.brown, Brandbook.Colors.green, Brandbook.Colors.indigo, Brandbook.Colors.pink, Brandbook.Colors.orange]
    
     let labelName: UILabel = {
@@ -50,15 +51,20 @@ class TableCell: UITableViewCell {
     }
     
     func setSkillsLabels(skills: [String]) {
-        for (key, element) in skills.enumerated() {
-            let label = PaddingLabel()
-            label.backgroundColor = colors.randomElement()
-            label.style()
-            label.text = element
-            labels.append(label)
+        for (_, element) in skills.enumerated() {
+            if !skills_array.contains(element) {
+                skills_array.append(element)
+                print("skills array-> \(element)")
+                let label = PaddingLabel()
+                label.backgroundColor = colors.randomElement()
+                label.style()
+                label.text = element
+                labels.append(label)
+            }
         }
-
-
+        print("labels")
+        print(labels)
+        
         for (key, element) in labels.enumerated() {
             addSubview(element)
             element.topAnchor.constraint(equalTo: labelTel.bottomAnchor, constant: Brandbook.Padding.small).isActive = true
@@ -69,7 +75,9 @@ class TableCell: UITableViewCell {
             else {
                 element.leftAnchor.constraint(equalTo: labels[key-1].rightAnchor, constant: Brandbook.Padding.small).isActive = true
             }
+        
         }
+        
     }
     
     required init?(coder: NSCoder) {
