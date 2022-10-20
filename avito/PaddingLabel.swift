@@ -47,3 +47,21 @@ class PaddingLabel: UILabel {
         get { return textEdgeInsets.bottom }
     }
 }
+
+extension PaddingLabel {
+    func style() {
+//        backgroundColor = .cyan
+        translatesAutoresizingMaskIntoConstraints = false
+        layer.masksToBounds = true
+        layer.cornerRadius = Brandbook.CornerRadius.normal
+        text = ""
+        font = UIFont.systemFont(ofSize: Brandbook.TextSize.small)
+        sizeToFit()
+        numberOfLines = 0
+        paddingTop = Brandbook.Padding.small
+        paddingBottom = Brandbook.Padding.small
+        paddingRight = Brandbook.Padding.light
+        paddingLeft = Brandbook.Padding.light
+        
+    }
+}

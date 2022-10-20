@@ -14,11 +14,14 @@ class ViewController: UIViewController {
     private let refreshAction: () -> Void
     private let refreshControl = UIRefreshControl()
     
+    private let sizingCell = TableCell()
+    
     let reachability = try! Reachability()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
+        tableView.estimatedRowHeight = 44.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,8 +114,29 @@ extension ViewController: UITableViewDataSource {
         return Brandbook.Height.section
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Brandbook.Height.row
+ 
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return Brandbook.Height.row
+//        sizingCell.frame = CGRect(
+//            origin: .zero, size: CGSize(width: tableView.bounds.width - Brandbook.Padding.normal*2, height: 1000)
+//        )
+//
+//        let size = sizingCell.systemLayoutSizeFitting(
+//            CGSize(width: tableView.bounds.width - Brandbook.Padding.normal*2, height: .greatestFiniteMagnitude),
+//            withHorizontalFittingPriority:  .required, verticalFittingPriority: .defaultLow
+//        )
+//
+//        return size.height
+//    }
+    
+    func tableView(tableView: UITableView,
+        heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -125,6 +149,8 @@ extension ViewController: UITableViewDataSource {
         }
         return cell
     }
+    
+    
 }
 
 

@@ -9,27 +9,34 @@ import Foundation
 import UIKit
 class TableCell: UITableViewCell {
     static let reusedId = "cellId"
-    var labels: [PaddingLabel] = []
-    var skills_array: [String] = []
     var colors: [UIColor] = [Brandbook.Colors.teal, Brandbook.Colors.yellow, Brandbook.Colors.brown, Brandbook.Colors.green, Brandbook.Colors.indigo, Brandbook.Colors.pink, Brandbook.Colors.orange]
-   
+    var labels: [SkillLabel] = []
+//    var labels: [PaddingLabel] = []
+    var offset: CGFloat = 10
+    
     let labelName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.sizeToFit()
+        label.numberOfLines = 0
         return label
     }()
     
     let labelTel: UILabel = {
         let label = UILabel()
+        label.sizeToFit()
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let labelSkills: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let skillsView: UIView = {
+        let view = UIView()
+//        view.axis = .vertical
+//        view.alignment = .center
+//        view.distribution = .fillProportionally
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -45,6 +52,12 @@ class TableCell: UITableViewCell {
         addSubview(labelTel)
         labelTel.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: Brandbook.Padding.normal).isActive = true
         
+        addSubview(skillsView)
+        skillsView.topAnchor.constraint(equalTo: labelTel.bottomAnchor, constant: Brandbook.Padding.small).isActive = true
+        skillsView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: Brandbook.Padding.normal).isActive = true
+        skillsView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -Brandbook.Padding.normal).isActive = true
+        skillsView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        skillsView.backgroundColor = .red
 
         
        
@@ -52,29 +65,65 @@ class TableCell: UITableViewCell {
     
     func setSkillsLabels(skills: [String]) {
         for (_, element) in skills.enumerated() {
-            if !skills_array.contains(element) {
-                skills_array.append(element)
-                print("skills array-> \(element)")
-                let label = PaddingLabel()
-                label.backgroundColor = colors.randomElement()
-                label.style()
-                label.text = element
-                labels.append(label)
-            }
+            print("skills array-> \(element)")
+            let label = SkillLabel(frame: CGRect(x: 0, y: 0, width: 70, height: 20))
+            label.text(element)
+            
+            label.backgroundColor = colors.randomElement()
+            
+            
+            
+            
+            
+//            let label = PaddingLabel()
+//            label.backgroundColor = colors.randomElement()
+//            label.style()
+//            let font = UIFont.preferredFont(forTextStyle: .headline)
+//            let attributes: [NSAttributedString.Key: Any] = [.font: font]
+//            let size = element.size(withAttributes: attributes)
+//            label.frame = CGRect(x: 0.0, y: 0.0, width: size.width + 10.0, height: size.height + 10.0)
+//            label.text = element
+            //                label.myLabel.style()
+            
+            //            label.text(element)
+            labels.append(label)
         }
         print("labels")
         print(labels)
         
+        
+        
+        
+        var x = offset
+        var y = offset
         for (key, element) in labels.enumerated() {
-            addSubview(element)
-            element.topAnchor.constraint(equalTo: labelTel.bottomAnchor, constant: Brandbook.Padding.small).isActive = true
-            if key == 0 {
-                element.leftAnchor.constraint(equalTo: self.leftAnchor, constant: Brandbook.Padding.small).isActive = true
-                
+            element.frame = CGRect(x: x, y: y, width: element.frame.width, height: element.frame.height)
+            x += element.frame.width + offset
+
+            let nextElement = key <= labels.count - 2 ? labels[key+1] : labels[key]
+            let nextElementWidth = nextElement.frame.width + offset
+
+            if x + nextElementWidth > frame.width {
+                x = offset
+                y += element.frame.height + offset
             }
-            else {
-                element.leftAnchor.constraint(equalTo: labels[key-1].rightAnchor, constant: Brandbook.Padding.small).isActive = true
-            }
+
+//            addSubview(element)
+            
+            
+            skillsView.addSubview(element)
+            
+//            skillsView.addArrangedSubview(element)
+//            skillsView.addSubview(element)
+//            element.topAnchor.constraint(equalTo: skillsView.topAnchor, constant: Brandbook.Padding.small).isActive = true
+//            element.bottomAnchor.constraint(equalTo: skillsView.bottomAnchor, constant: Brandbook.Padding.small).isActive = true
+//            if key == 0 {
+//                element.leftAnchor.constraint(equalTo: skillsView.leftAnchor, constant: Brandbook.Padding.small).isActive = true
+//
+//            }
+//            else {
+//                element.leftAnchor.constraint(equalTo: labels[key-1].rightAnchor, constant: Brandbook.Padding.small).isActive = true
+//            }
         
         }
         
@@ -85,19 +134,5 @@ class TableCell: UITableViewCell {
     }
 }
 
-extension PaddingLabel {
-    func style() {
-//        backgroundColor = .cyan
-        translatesAutoresizingMaskIntoConstraints = false
-        layer.masksToBounds = true
-        layer.cornerRadius = Brandbook.CornerRadius.normal
-        text = ""
-        font = UIFont.systemFont(ofSize: Brandbook.TextSize.small)
-        paddingTop = Brandbook.Padding.small
-        paddingBottom = Brandbook.Padding.small
-        paddingRight = Brandbook.Padding.light
-        paddingLeft = Brandbook.Padding.light
-        
-    }
-}
+
 
