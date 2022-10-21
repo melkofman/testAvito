@@ -13,9 +13,12 @@ class PaddingLabel: UILabel {
     }
     
     open override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
-        let insetRect = bounds.inset(by: textEdgeInsets)
-        let textRect = super.textRect(forBounds: insetRect, limitedToNumberOfLines: numberOfLines)
-        let invertedInsets = UIEdgeInsets(top: -textEdgeInsets.top, left: -textEdgeInsets.left, bottom: -textEdgeInsets.bottom, right: -textEdgeInsets.right)
+        let insetRect       = bounds.inset(by: textEdgeInsets)
+        let textRect        = super.textRect(forBounds: insetRect, limitedToNumberOfLines: numberOfLines)
+        let invertedInsets  = UIEdgeInsets(top: -textEdgeInsets.top,
+                                           left: -textEdgeInsets.left,
+                                           bottom: -textEdgeInsets.bottom,
+                                           right: -textEdgeInsets.right)
         return textRect.inset(by: invertedInsets)
     }
     
@@ -23,25 +26,21 @@ class PaddingLabel: UILabel {
         super.drawText(in: rect.inset(by: textEdgeInsets))
     }
     
-//    @IBInspectable
     var paddingLeft: CGFloat {
         set { textEdgeInsets.left = newValue }
         get { return textEdgeInsets.left }
     }
     
-//    @IBInspectable
     var paddingRight: CGFloat {
         set { textEdgeInsets.right = newValue }
         get { return textEdgeInsets.right }
     }
     
-//    @IBInspectable
     var paddingTop: CGFloat {
         set { textEdgeInsets.top = newValue }
         get { return textEdgeInsets.top }
     }
     
-//    @IBInspectable
     var paddingBottom: CGFloat {
         set { textEdgeInsets.bottom = newValue }
         get { return textEdgeInsets.bottom }
@@ -50,18 +49,18 @@ class PaddingLabel: UILabel {
 
 extension PaddingLabel {
     func style() {
-//        backgroundColor = .cyan
-        translatesAutoresizingMaskIntoConstraints = false
-        layer.masksToBounds = true
-        layer.cornerRadius = Brandbook.CornerRadius.normal
-        text = ""
-        font = UIFont.systemFont(ofSize: Brandbook.TextSize.small)
         sizeToFit()
-        numberOfLines = 0
-        paddingTop = Brandbook.Padding.small
-        paddingBottom = Brandbook.Padding.small
-        paddingRight = Brandbook.Padding.light
-        paddingLeft = Brandbook.Padding.light
+        translatesAutoresizingMaskIntoConstraints = false
+        layer.masksToBounds                       = true
+        layer.cornerRadius                        = Brandbook.CornerRadius.normal
+        text                                      = ""
+        font                                      = UIFont.systemFont(ofSize:
+                                                    Brandbook.TextSize.small)
+        numberOfLines                             = 0
+        paddingTop                                = Brandbook.Padding.small
+        paddingBottom                             = Brandbook.Padding.small
+        paddingRight                              = Brandbook.Padding.light
+        paddingLeft                               = Brandbook.Padding.light
         
     }
 }

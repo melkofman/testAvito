@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
-        tableView.estimatedRowHeight = 44.0
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,6 +93,8 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    
 }
 
 extension ViewController: UITableViewDataSource {
@@ -130,17 +132,31 @@ extension ViewController: UITableViewDataSource {
 //        return size.height
 //    }
     
-    func tableView(tableView: UITableView,
-        heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return Brandbook.Height.row
+//        sizingCell.frame = CGRect(
+//            origin: .zero, size: CGSize(width: tableView.bounds.width - Brandbook.Padding.normal*2, height: 1000)
+//        )
+//
+//        let size = sizingCell.systemLayoutSizeFitting(
+//            CGSize(width: tableView.bounds.width - Brandbook.Padding.normal*2, height: .greatestFiniteMagnitude),
+//            withHorizontalFittingPriority:  .required, verticalFittingPriority: .defaultLow
+//        )
+
         return UITableView.automaticDimension
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
+    func tableView(tableView: UITableView,
+        heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+
     }
+    
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableCell.reusedId, for: indexPath) as! TableCell
+        cell.clear()
         cell.labelName.text = model?.company.employees[indexPath.row].name
         cell.labelTel.text = model?.company.employees[indexPath.row].phone_number
         if let skills = model?.company.employees[indexPath.row].skills {

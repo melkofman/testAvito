@@ -55,7 +55,7 @@ private extension Cache {
         let expDate: Date
         
         init(value: Value, expDate: Date) {
-            self.value = value
+            self.value   = value
             self.expDate = expDate
         }
     }
