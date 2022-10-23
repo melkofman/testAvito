@@ -20,6 +20,7 @@ enum Brandbook {
         static let black_alpha: UIColor = .black.withAlphaComponent(0.6)
     }
     enum TextSize {
+        static let tiny: CGFloat        = 12
         static let small: CGFloat       = 13
         static let body: CGFloat        = 16
     }

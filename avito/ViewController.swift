@@ -39,7 +39,7 @@ class ViewController: UIViewController {
       let reachability = note.object as! Reachability
         
         if reachability.connection == .unavailable {
-            showMessageToas(message: "Че-то с сетью")
+            showMessageToast(message: "Че-то с сетью")
         }
 
     }
@@ -50,7 +50,6 @@ class ViewController: UIViewController {
     }
     
     init(refreshAction: @escaping () -> Void) {
-        print("init vc")
         self.refreshAction = refreshAction
         super.init(nibName: nil, bundle: nil)
     }
@@ -84,8 +83,8 @@ class ViewController: UIViewController {
         self.refreshControl.endRefreshing()
     }
     
-    func showMessageToas(message:String) {
-        showToast(message: message, font: .systemFont(ofSize: 12.0))
+    func showMessageToast(message:String) {
+        showToast(message: message, font: .systemFont(ofSize: Brandbook.TextSize.tiny))
     }
 }
 
@@ -93,8 +92,6 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    
 }
 
 extension ViewController: UITableViewDataSource {
@@ -115,34 +112,9 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Brandbook.Height.section
     }
-    
- 
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return Brandbook.Height.row
-//        sizingCell.frame = CGRect(
-//            origin: .zero, size: CGSize(width: tableView.bounds.width - Brandbook.Padding.normal*2, height: 1000)
-//        )
-//
-//        let size = sizingCell.systemLayoutSizeFitting(
-//            CGSize(width: tableView.bounds.width - Brandbook.Padding.normal*2, height: .greatestFiniteMagnitude),
-//            withHorizontalFittingPriority:  .required, verticalFittingPriority: .defaultLow
-//        )
-//
-//        return size.height
-//    }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return Brandbook.Height.row
-//        sizingCell.frame = CGRect(
-//            origin: .zero, size: CGSize(width: tableView.bounds.width - Brandbook.Padding.normal*2, height: 1000)
-//        )
-//
-//        let size = sizingCell.systemLayoutSizeFitting(
-//            CGSize(width: tableView.bounds.width - Brandbook.Padding.normal*2, height: .greatestFiniteMagnitude),
-//            withHorizontalFittingPriority:  .required, verticalFittingPriority: .defaultLow
-//        )
-
         return UITableView.automaticDimension
     }
     
@@ -152,8 +124,6 @@ extension ViewController: UITableViewDataSource {
 
     }
     
-
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableCell.reusedId, for: indexPath) as! TableCell
         cell.clear()
@@ -161,19 +131,17 @@ extension ViewController: UITableViewDataSource {
         cell.labelTel.text = model?.company.employees[indexPath.row].phone_number
         if let skills = model?.company.employees[indexPath.row].skills {
             cell.setSkillsLabels(skills: skills)
-            print("\(model?.company.employees[indexPath.row].name) -> \(skills)")
         }
         return cell
     }
-    
-    
 }
-
 
 extension UIViewController {
     
     func showToast(message : String, font: UIFont) {
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75,
+                                               y: self.view.frame.size.height-100,
+                                               width: 150, height: 35))
         toastLabel.backgroundColor = Brandbook.Colors.black_alpha
         toastLabel.textColor = Brandbook.Colors.white
         toastLabel.font = font

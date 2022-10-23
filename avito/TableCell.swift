@@ -95,13 +95,11 @@ class TableCell: UITableViewCell {
         labelTel.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: Brandbook.Padding.small).isActive     = true
         labelTel.leftAnchor.constraint(equalTo: labelTelText.rightAnchor, constant: Brandbook.Padding.small).isActive  = true
         
-        
         addSubview(skillsView)
         skillsView.topAnchor.constraint(equalTo: labelTel.bottomAnchor, constant: Brandbook.Padding.small).isActive    = true
         skillsView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: Brandbook.Padding.normal).isActive        = true
         skillsView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -Brandbook.Padding.normal).isActive     = true
         skillsView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Brandbook.Padding.normal).isActive   = true
-//        skillsView.backgroundColor = .red
         
     }
     
@@ -120,9 +118,8 @@ class TableCell: UITableViewCell {
         labels.removeAll()
     }
     
-    
     func countN() {
-        //        Подсчет количества tagView в зависимости от длин view с лэйблами
+    //Подсчет количества tagView в зависимости от длин view с лэйблами
         let widthScreen = UIScreen.main.bounds.width-Brandbook.Padding.normal
         var width = 0.0
         
@@ -134,16 +131,14 @@ class TableCell: UITableViewCell {
                 n += 1
                 width = 0
             }
-            
         }
     }
     
     func setSkillsLabels(skills: [String]) {
-        //        создание массива лэйблов для добавления в stackView
+    //создание массива лэйблов для добавления в stackView
         for (_, element) in skills.enumerated() {
             let label = SkillLabel(frame: CGRect(x: 0, y: 0,
                                                  width: element.ga_widthForComment(fontSize: Brandbook.TextSize.small),
-//                                                 width: 70,
                                                  height: 20))
             label.text(element)
             label.backgroundColor = colors.randomElement()
@@ -155,17 +150,14 @@ class TableCell: UITableViewCell {
         var i = 0
         let tagView          = UIStackView()
         tagView.axis         = .horizontal
-//        tagView.alignment = .leading
         tagView.distribution = .fillEqually
         tagView.spacing      = Brandbook.Padding.normal
         tagView.translatesAutoresizingMaskIntoConstraints = false
-//        tagView.backgroundColor = .blue
-        
         
         while i <= n {
             
             for (_, element) in labels.enumerated() {
-                //            добавление лэйблов (view с лэйблами) на tagView
+            // добавление лэйблов (view с лэйблами) на tagView
                 var width = 0.0
                 let screenWidth = UIScreen.main.bounds.width - Brandbook.Padding.normal*2
                 while width < screenWidth {
@@ -181,7 +173,7 @@ class TableCell: UITableViewCell {
             }
         }
         for tag in self.tagView {
-            //            добавление tagView на skillsView
+        // добавление tagView на skillsView
             skillsView.addArrangedSubview(tag)
         }
     }
@@ -192,23 +184,12 @@ class TableCell: UITableViewCell {
 }
 
 extension String {
-    func ga_widthForComment(fontSize: CGFloat, height: CGFloat = 15) -> CGFloat {
+    func ga_widthForComment(fontSize: CGFloat, height: CGFloat = Brandbook.TextSize.small) -> CGFloat {
         let font = UIFont.systemFont(ofSize: fontSize)
         let rect = NSString(string: self).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: height), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         return ceil(rect.width)
     }
     
-    func ga_heightForComment(fontSize: CGFloat, width: CGFloat) -> CGFloat {
-        let font = UIFont.systemFont(ofSize: fontSize)
-        let rect = NSString(string: self).boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
-        return ceil(rect.height)
-    }
-    
-    func ga_heightForComment(fontSize: CGFloat, width: CGFloat, maxHeight: CGFloat) -> CGFloat {
-        let font = UIFont.systemFont(ofSize: fontSize)
-        let rect = NSString(string: self).boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
-        return ceil(rect.height)>maxHeight ? maxHeight : ceil(rect.height)
-    }
 }
 
 extension UIStackView {

@@ -21,10 +21,9 @@ class Graph {
         dataSource.showToast{ [unowned self] in
             let message = $0
             DispatchQueue.main.async {
-            self.viewController.showMessageToas(message: message)
+            self.viewController.showMessageToast(message: message)
             }
         }
-//        setUpUpdate()
     }
     
     func setUpUpdate() {
